@@ -32,6 +32,41 @@ class Produto {
     
         $stmt->close();
     }
+
+    public function getProduto($id) {
+        $stmt = $this->conn->prepare("SELECT * FROM produtos WHERE id = ?");
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_assoc();
+    }
+    
+    public function atualizar($id, $descricao, $valorVenda, $estoque) {
+        $stmt = $this->conn->prepare("UPDATE produtos SET descricao = ?, valorVenda = ?, estoque = ? WHERE id = ?");
+        $stmt->bind_param("sdii", $descricao, $valorVenda, $estoque, $id);
+    
+        if ($stmt->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    
+        $stmt->close();
+    }
+
+    public function excluir($id) {
+        $stmt = $this->conn->prepare("DELETE FROM produtos WHERE ID = ?");
+        $stmt->bind_param("i", $id);
+    
+        if ($stmt->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    
+        $stmt->close();
+    }
+    
     
 }
 ?>
