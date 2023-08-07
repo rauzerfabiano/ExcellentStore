@@ -6,5 +6,23 @@ class Produtos extends Controller {
 
         $this->view('produtos/index', ['produtos' => $produtos]);
     }
+
+    public function cadastrar() {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $descricao = $_POST['descricao'];
+            $valorVenda = $_POST['valorVenda'];
+            $estoque = $_POST['estoque'];
+    
+            $produtoModel = $this->model('Produto');
+    
+            if ($produtoModel->cadastrar($descricao, $valorVenda, $estoque)) {
+                header('location:/produtos'); // Redirect to the product list
+            } else {
+                die('Algo deu errado');
+            }
+        } else {
+            $this->view('produtos/cadastrar');
+        }
+    }
 }
 ?>

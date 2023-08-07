@@ -19,5 +19,19 @@ class Produto {
             return null;
         }
     }
+
+    public function cadastrar($descricao, $valorVenda, $estoque) {
+        $stmt = $this->conn->prepare("INSERT INTO produtos (descricao, valorVenda, estoque) VALUES (?, ?, ?)");
+        $stmt->bind_param("sdi", $descricao, $valorVenda, $estoque);
+    
+        if ($stmt->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    
+        $stmt->close();
+    }
+    
 }
 ?>
