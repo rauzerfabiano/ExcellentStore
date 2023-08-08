@@ -44,6 +44,19 @@ class Pedido {
             return false;
         }
     }
+
+    public function excluir($id) {
+        $stmt = $this->conn->prepare("DELETE FROM pedidos WHERE ID = ?");
+        $stmt->bind_param("i", $id);
+    
+        if ($stmt->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    
+        $stmt->close();
+    }
 }
 
 ?>

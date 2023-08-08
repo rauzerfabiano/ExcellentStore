@@ -14,7 +14,7 @@ class Pedidos extends Controller {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $cliente = $_POST['cliente'];
             $produtos = [];
-                    
+
             foreach ($_POST['produtos'] as $produtoId => $quantidade) {
                 $produto = $produtoModel->getProduto($produtoId);
                 $produtos[] = [
@@ -34,6 +34,16 @@ class Pedidos extends Controller {
         } else {
             $produtos = $produtoModel->listarProdutos();
             $this->view('pedidos/criar', ['produtos' => $produtos]);
+        }
+    }
+
+    public function excluir($id) {
+        $pedidoModel = $this->model('Pedido');
+        
+        if ($pedidoModel->excluir($id)) {
+            header('location:/pedidos'); // Redirect to the orders list
+        } else {
+            die('Algo deu errado');
         }
     }
     
