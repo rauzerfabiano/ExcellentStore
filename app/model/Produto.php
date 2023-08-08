@@ -66,6 +66,19 @@ class Produto {
     
         $stmt->close();
     }
+
+    public function adicionarImagem($produtoId, $caminho) {
+        $stmt = $this->conn->prepare("INSERT INTO imagens_produto (produto_id, caminho) VALUES (?, ?)");
+        $stmt->bind_param("is", $produtoId, $caminho);
+    
+        if ($stmt->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    
+        $stmt->close();
+    }
     
     
 }

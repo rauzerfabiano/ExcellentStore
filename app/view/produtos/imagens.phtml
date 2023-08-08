@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="public/css/bootstrap.min.css">
+    <title>Upload de Imagens</title>
+</head>
+<body>
+    <div class="container mt-4">
+        <h1>Upload de Imagens para o Produto <?php echo $produtoId; ?></h1>
+        <form action="produtos/imagens/<?php echo $produtoId; ?>" method="POST" enctype="multipart/form-data">
+            <div class="mb-3">
+                <input type="file" class="form-control" name="imagens[]" id="imagens" multiple required>
+            </div>
+            <button type="submit" class="btn btn-primary">Carregar Imagens</button>
+        </form>
+    </div>
+    <script src="public/js/bootstrap.min.js"></script>
+</body>
+</html>
